@@ -1,0 +1,9 @@
+version: '3'
+services:
+  react:
+    image: front1:latest
+    ports:
+      - "3000:3000"
+  
+
+
