@@ -1,5 +1,5 @@
 
-import React, {  useState } from 'react'
+import React, {  useState, useEffect  } from 'react'
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
 
@@ -14,6 +14,10 @@ const ChatRoom = () => {
         connected: false,
         message: ''
       });
+
+      useEffect(() => {
+        setUserData({ ...userData, username: localStorage.getItem('username') || '' });
+      }, []);
 
     const handleUsername=(event)=>{
         const {value}=event.target;
@@ -139,7 +143,6 @@ const ChatRoom = () => {
         setUserData({...userData,"message": value});
     }
 
-   
     return (
        
     <div >
@@ -189,10 +192,11 @@ const ChatRoom = () => {
         :
         <div className="register">
             <input
+                readOnly
                 id="user-name"
                 placeholder="Enter your name"
                 name="userName"
-                value={userData.username}
+                value={localStorage.getItem('username')}
                 onChange={handleUsername}
                 
               />
